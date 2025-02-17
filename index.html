@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LASHES JADE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes:wght@400&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Quicksand", sans-serif;
+        }
+
+        body {
+            background-color: #fdf2f7;
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/background-1.jpg-aNodz7jrsfzYhMTQb7tUe6RNe05Rtf.jpeg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+
+        .floating-menu {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .menu-trigger {
+            width: 50px;
+            height: 50px;
+            background-color: #ff3e7e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-trigger:hover {
+            transform: scale(1.1);
+        }
+
+        .menu-content {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+            min-width: 200px;
+        }
+
+        .menu-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .menu-content a {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .menu-content a:hover {
+            background-color: #ff3e7e;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            width: 300px;
+            height: 300px;
+            margin: 2rem auto 1rem;
+            display: block;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .animated-title {
+            font-family: 'Great Vibes', cursive;
+            text-align: center;
+            font-size: 3.5em;
+            color: white;
+            margin: 1rem 0 2rem;
+            padding-top: 0;
+            animation: fadeInUp 1.5s ease-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-section {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            margin: 2rem 0;
+            border-radius: 20px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-box {
+            position: relative;
+            flex: 1;
+            min-width: 280px;
+            margin: 1rem;
+            padding: 2rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-box h1 {
+            color: #ff3e7e;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .info-box p {
+            color: #fff;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .services-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .service-card .description {
+            padding: 1.5rem;
+        }
+
+        .service-card h3 {
+            color: #ff3e7e;
+            margin-bottom: 0.5rem;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .service-card p {
+            color: white;
+            line-height: 1.6;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .service-card .price {
+            color: #ff3e7e;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .service-card .maintenance {
+            color: #ffffff;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .service-card .duration {
+            color: #ffffff;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .whatsapp-bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-bubble:hover {
+            transform: scale(1.05);
+            background-color: #128C7E;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 0.5rem;
+            }
+
+            .animated-title {
+                font-size: 2.5em;
+                margin: 2rem 0 1.5rem;
+            }
+
+            .logo {
+                width: 200px;
+                height: 200px;
+                margin: 1rem auto;
+            }
+
+            .info-section,
+            .services-section {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+
+            .info-box,
+            .service-card {
+                margin: 0.5rem 0;
+            }
+
+            .services-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="inicio">
+        <div class="floating-menu">
+            <div class="menu-trigger">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M3 12h18M3 6h18M3 18h18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="menu-content">
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#contacto">Contacto</a>
+                <a href="https://wa.me/+5356929525?text=Hola%20me%20interesa%20reservar%20un%20turno%20mi%20nombre:">Reservas</a>
+                <a href="https://maps.app.goo.gl/t5RpqEmt6SPxzqPf9" target="_blank">Localización</a>
+            </div>
+        </div>
+
+        <div class="logo">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250217-WA0061(1)-qnntBwHmKvuxQX0GhN4B5wXH8jwukA.png" alt="Lashes Jade Logo">
+        </div>
+
+        <h1 class="animated-title">Estamos para resaltar la BELLEZA de tu MIRADA</h1>
+
+        <section class="info-section" id="contacto">
+            <div class="info-box">
+                <h1>Dirección</h1>
+                <p>Reparto Lenin calazada B #74<br>Detras del organoponico</p>
+            </div>
+            <div class="info-box">
+                <h1>Teléfono</h1>
+                <p>+53 56929525<br></p>
+            </div>
+        </section>
+
+        <section class="services-section" id="servicios">
+            <div class="service-card">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hibrida-1.jpg-fJqPelBKMddvv2TdFFA4bNrzkpvvoF.jpeg" alt="Extensiones Híbridas">
+                <div class="description">
+                    <h3>Híbridas</h3>
+                    <p>Combina volumen y naturalidad para un look único y sofisticado.</p>
+                    <div class="price">$2000</div>
+                    <div class="maintenance">Mantenimiento: $1500</div>
+                    <div class="duration">Duración: 2 horas</div>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/volumen-ruso-3.jpg-HM8S8n0WH633o45KG0NV5YQZG8qZSA.jpeg" alt="Volumen Ruso">
+                <div class="description">
+                    <h3>Volumen Ruso (4D)</h3>
+                    <p>Máxima definición y volumen para una mirada impactante.</p>
+                    <div class="price">$3000</div>
+                    <div class="maintenance">Mantenimiento: $2500</div>
+                    <div class="duration">Duración: 2.5 horas</div>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/efecto-wispy-5.jpg-8zwyTIj8BDCeL2qvUjjAXASTvCN0r7.jpeg" alt="Efecto Wispy">
+                <div class="description">
+                    <h3>Efecto Wispy</h3>
+                    <p>Estilo natural y desenfadado con un toque de glamour.</p>
+                    <div class="price">$3000</div>
+                    <div class="maintenance">Mantenimiento: $2500</div>
+                    <div class="duration">Duración: 1.5 horas</div>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/volumen-egipcio-7.jpg-5dZy9kYp8q3pjWaKhjn5Nka73qXUVB.jpeg" alt="Volumen Egipcio">
+                <div class="description">
+                    <h3>Volumen Egipcio (3D)</h3>
+                    <p>Elegancia y misterio inspirados en la belleza del antiguo Egipto.</p>
+                    <div class="price">$2500</div>
+                    <div class="maintenance">Mantenimiento: $2000</div>
+                    <div class="duration">Duración: 3 horas</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <a href="https://wa.me/+5356929525?text=Hola%20me%20interesa%20reservar%20un%20turno%20mi%20nombre:" class="whatsapp-bubble">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.784 23.456l4.5-1.436C7.236 23.251 9.547 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.067 19.5c-1.621 0-3.158-.412-4.5-1.136l-3.142 1.003.986-2.944C4.73 15.108 4.25 13.611 4.25 12c0-4.549 3.701-8.25 8.25-8.25 4.549 0 8.25 3.701 8.25 8.25 0 4.549-3.701 8.25-8.25 8.25z"/>
+        </svg>
+        ¿Reservamos?
+    </a>
+
+    <script>
+        const menuTrigger = document.querySelector('.menu-trigger');
+        const menuContent = document.querySelector('.menu-content');
+
+        menuTrigger.addEventListener('click', () => {
+            menuContent.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.floating-menu')) {
+                menuContent.classList.remove('active');
+            }
+        });
+
+        function scrollToElement(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        document.querySelectorAll('.menu-content a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    scrollToElement(href.substring(1));
+                }
+                
+                menuContent.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
